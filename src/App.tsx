@@ -1,25 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter, Link,
+  Route,
+  Routes
+} from "react-router-dom";
+import Hello from "./Hello";
+import About from "./About";
+import Root from "./Root";
+import QueryString from "./QueryString";
+
+/*
+1 - Routes definition
+2 - Links
+3 - Programmatic redirections (replace)
+4 - URL Params
+5 - Query Params
+ */
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <h1>Meine App</h1>
+
+      <ul>
+        <li><Link to={"/hello/muslim"}>Hello</Link></li>
+        <li><Link to={"/about"}>About</Link></li>
+        <li><Link to={"/query-string"}>Query String</Link></li>
+        <li><a href={"/hello/muslim"}>Hello with refresh</a></li>
+      </ul>
+
+      <Routes>
+        <Route path={"/"} element={<Root/>}/>
+        <Route path={"/hello/:name"} element={<Hello/>}/>
+        <Route path={"/about"} element={<About/>}/>
+        <Route path={"/query-string"} element={<QueryString/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
